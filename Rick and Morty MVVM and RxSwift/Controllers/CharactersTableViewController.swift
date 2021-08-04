@@ -19,6 +19,7 @@ class CharactersTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Not receiving viewModels
         episodesTVC.selectedEpisodeSubjectObservable.subscribe(onNext: {
             episode in
             
