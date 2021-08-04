@@ -1,0 +1,6 @@
+framework module Pods_Rick_and_Morty_MVVM_and_RxSwift {
+  umbrella header "Pods-Rick and Morty MVVM and RxSwift-umbrella.h"
+
+  export *
+  module * { export * }
+}
