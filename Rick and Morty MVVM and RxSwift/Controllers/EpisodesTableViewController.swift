@@ -42,8 +42,6 @@ class EpisodesTableViewController: UITableViewController {
         
         let episodeVM = self.episodeListViewModel.episodeAt(indexPath.row)
         
-        
-        
         episodeVM.episodeName.asDriver(onErrorJustReturn: "Error retrieving data")
             .drive((cell.textLabel?.rx.text)!)
             .disposed(by: disposeBag)
@@ -59,19 +57,7 @@ class EpisodesTableViewController: UITableViewController {
         
     }
     
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if(segue.identifier == "SegueToCharacters") {
-//            
-//            
-//            let destinationVC = segue.destination as? CharactersTableViewController
-//            
-//        }
-//        
-//        
-//        
-//    }
-    
-    
+
     
     private func populateEpisodes() {
         

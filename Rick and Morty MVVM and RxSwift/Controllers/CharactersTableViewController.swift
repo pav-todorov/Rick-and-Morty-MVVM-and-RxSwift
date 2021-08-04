@@ -13,9 +13,20 @@ class CharactersTableViewController: UITableViewController {
     
     private let disposeBag = DisposeBag()
     private var episodeViewModel = BehaviorRelay<EpisodeViewModel?>(value: nil)
+    
+    let episodesTVC = EpisodesTableViewController()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        episodesTVC.selectedEpisodeSubjectObservable.subscribe(onNext: {
+            episode in
+            
+            var existingEpisode = self.episodeViewModel
+            self.episodeViewModel = existingEpisode
+            
+            
+        }).disposed(by: disposeBag)
 
     }
 
@@ -38,23 +49,6 @@ class CharactersTableViewController: UITableViewController {
             .disposed(by: disposeBag)
 
         return cell
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-            let destinationVC = segue.destination as? EpisodesTableViewController
-        
-            destinationVC?.selectedEpisodeSubjectObservable.subscribe(onNext: { [unowned self] selectedEpisode in
-                
-                var existingCharacters = self.episodeViewModel.value
-                existingCharacters = selectedEpisode
-                
-                self.episodeViewModel.accept(existingCharacters)
-               
-                
-            }).disposed(by: disposeBag)
-        
-        
     }
 
 }
