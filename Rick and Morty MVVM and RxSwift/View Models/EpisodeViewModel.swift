@@ -43,6 +43,8 @@ extension EpisodeViewModel {
         return Observable<String>.just(episode.episode)
     }
     
-    
+    var episodeCharacters: Observable<[String]> {
+        return Observable<[String]>.just(episode.characters)
+    }
     
 }

@@ -12,6 +12,9 @@ import RxCocoa
 class EpisodesTableViewController: UITableViewController {
     
     let disposeBag = DisposeBag()
+    
+    var indexOfSelectedEpisode = 0
+    
     private var episodeListViewModel = EpisodeListViewModel()
     
     private let selectedEpisode = PublishSubject<EpisodeViewModel>()
@@ -53,8 +56,17 @@ class EpisodesTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.selectedEpisode.onNext(episodeListViewModel.episodeAt(indexPath.row))
         
+        self.indexOfSelectedEpisode = indexPath.row
+        
         self.performSegue(withIdentifier: "SegueToCharacters", sender: self)
         
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        var charactersVC = segue.destination as? CharactersTableViewController
+        
+        charactersVC?.receivedEpisode.accept(self.episodeListViewModel.episodeAt(self.indexOfSelectedEpisode))
     }
     
 

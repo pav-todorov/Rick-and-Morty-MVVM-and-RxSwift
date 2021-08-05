@@ -19,6 +19,7 @@
 		E9981C1126BA8198002F04C3 /* EpisodesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9981C1026BA8198002F04C3 /* EpisodesTableViewController.swift */; };
 		E9981C1326BA825F002F04C3 /* EpisodeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9981C1226BA825F002F04C3 /* EpisodeViewModel.swift */; };
 		E9981C1526BA8E8F002F04C3 /* CharactersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9981C1426BA8E8F002F04C3 /* CharactersTableViewController.swift */; };
+		E9DD327326BC090B0023E504 /* CharactersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DD327226BC090B0023E504 /* CharactersViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		E9981C1026BA8198002F04C3 /* EpisodesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodesTableViewController.swift; sourceTree = "<group>"; };
 		E9981C1226BA825F002F04C3 /* EpisodeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeViewModel.swift; sourceTree = "<group>"; };
 		E9981C1426BA8E8F002F04C3 /* CharactersTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersTableViewController.swift; sourceTree = "<group>"; };
+		E9DD327226BC090B0023E504 /* CharactersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +111,7 @@
 			isa = PBXGroup;
 			children = (
 				E9981C1226BA825F002F04C3 /* EpisodeViewModel.swift */,
+				E9DD327226BC090B0023E504 /* CharactersViewModel.swift */,
 			);
 			path = "View Models";
 			sourceTree = "<group>";
@@ -252,6 +255,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E9DD327326BC090B0023E504 /* CharactersViewModel.swift in Sources */,
 				E94721BE26B977A90095AFB9 /* EpisodeList.swift in Sources */,
 				E94721C026B977C20095AFB9 /* Character.swift in Sources */,
 				E9981C1326BA825F002F04C3 /* EpisodeViewModel.swift in Sources */,
