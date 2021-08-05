@@ -16,7 +16,7 @@ class CharactersTableViewController: UITableViewController {
     var episodeViewModel = BehaviorRelay<EpisodeViewModel?>(value: nil)
     var receivedEpisode = BehaviorRelay<EpisodeViewModel?>(value: nil)
     
-    private var characterListViewModel = BehaviorRelay<[SingleCharacterViewModel]?>(value: nil)
+    private var characterListViewModel = BehaviorRelay<CharactersListViewModel?>(value: nil)
     
     //    var charactersURLList = PublishSubject<[String]>()
     
@@ -39,11 +39,11 @@ class CharactersTableViewController: UITableViewController {
         
         // MARK: - Table view data source
         
-        characterListViewModel.map({ singleCharacter in
+        characterListViewModel.value.map({ singleCharacter in
             singleCharacter
         })
         
-        characterListViewModel. .bind(to: tableView.rx.items(cellIdentifier: "CharacterTableViewCell")) { index, model, cell in
+        characterListViewModel.bind(to: tableView.rx.items(cellIdentifier: "CharacterTableViewCell")) { index, model, cell in
             
             cell.textLabel?.text = model
             
@@ -69,7 +69,7 @@ class CharactersTableViewController: UITableViewController {
                             
                             let characters = characterList
                             
-                            var model = CharactersListViewModel()
+                            let model = CharactersListViewModel()
                             
                             model.addCharacterViewModel(SingleCharacterViewModel(character: characters))
                             
