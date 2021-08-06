@@ -12,17 +12,21 @@ import RxDataSources
 
 class CharactersTableViewController: UITableViewController {
     
+    var toAppendCharacter:[Character] = []
+    
     private let disposeBag = DisposeBag()
     var episodeViewModel = BehaviorRelay<EpisodeViewModel?>(value: nil)
     var receivedEpisode = BehaviorRelay<EpisodeViewModel?>(value: nil)
+//    var singleCharacterViewModel = SingleCharacterViewModel(character: Character(name: "", status: "", species: "", gender: "", image: ""))
     
-    private var characterListViewModel = BehaviorRelay<CharactersListViewModel?>(value: nil)
+//    var charactersListViewModel = BehaviorRelay<CharactersListViewModel?>(value: nil)
     
-    //    var charactersURLList = PublishSubject<[String]>()
+    var charactersListViewModel: CharactersListViewModel?
     
+    var characterObject = PublishSubject<[Character]>()
+        
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         
         self.tableView.dataSource = nil
         
@@ -31,57 +35,73 @@ class CharactersTableViewController: UITableViewController {
             
             self.episodeViewModel.accept(episode)
             
-            
-            
-            
+         
         }).disposed(by: disposeBag)
         
         
         // MARK: - Table view data source
         
-        characterListViewModel.value.map({ singleCharacter in
-            singleCharacter
-        })
+//        var characters = charactersListViewModel?.getAllCharacters()
         
-        characterListViewModel.bind(to: tableView.rx.items(cellIdentifier: "CharacterTableViewCell")) { index, model, cell in
-            
-            cell.textLabel?.text = model
-            
-            
+        
+        
+        characterObject.bind(to: tableView.rx.items(cellIdentifier: "CharacterTableViewCell")) { index, model, cell in
+
+            cell.textLabel?.text = model.name
+
+
         }.disposed(by: disposeBag)
-        
+            
         populateCharacters()
+
+      
+        self.characterObject.onNext(toAppendCharacter)
+        
+
     }
     
     
     private func populateCharacters() {
         
-        self.receivedEpisode.value?.episodeCharacters.asObservable().toArray().subscribe(onSuccess: { twoDArrayOfLinks in
+        
             
-            let linksArray = twoDArrayOfLinks
+        receivedEpisode.subscribe(onNext: { episodeViewModel in
             
-            for oneDArray in linksArray{
-                for link in oneDArray {
-                    let resource = Resource<Character>(url: URL(string: link)!)
-                    
-                    URLRequest.load(resource: resource)
-                        .subscribe(onNext: { characterList in
-                            
-                            let characters = characterList
-                            
-                            let model = CharactersListViewModel()
-                            
-                            model.addCharacterViewModel(SingleCharacterViewModel(character: characters))
-                            
-                            self.characterListViewModel.accept(model)
-                            
-                        }).disposed(by: self.disposeBag)
-                    
-                    
-                }
+            if let episodeViewModel = episodeViewModel{
+                
+                let array = episodeViewModel.episodeCharacters
+                
+                array.subscribe(onNext: { linksArray in
+                    linksArray.compactMap { charactersLink in
+                        
+                        let resource = Resource<Character>(url: URL(string: charactersLink)!)
+                        
+                        URLRequest.load(resource: resource)
+                            .subscribe(onNext: { [self] character in
+                                
+                                          
+                                toAppendCharacter.append(character)
+
+                                print("characters inside closure 1", character)
+                                
+                                print("inside closure 1", toAppendCharacter.count)
+                                
+                            }).disposed(by: self.disposeBag)
+                        print("inside closure 2", self.toAppendCharacter.count)
+                    }
+                    print("inside closure 3", self.toAppendCharacter.count)
+                }).disposed(by: self.disposeBag)
+                print("inside closure 4", self.toAppendCharacter.count)
             }
-            
-        }).disposed(by: self.disposeBag)
+            print("inside closure 5", self.toAppendCharacter.count)
+        }).disposed(by: disposeBag)
+        
+        self.characterObject.onNext(toAppendCharacter)
+        
+        print("outside closure", toAppendCharacter.count)
+        
+        
         
     }
+    
 }

@@ -24,6 +24,10 @@ class CharactersListViewModel {
         return characterViewModels[index]
     }
     
+    func getAllCharacters() -> Observable<[SingleCharacterViewModel]> {
+        return Observable.of(self.characterViewModels)
+    }
+    
 }
 
 class SingleCharacterViewModel {
