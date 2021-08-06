@@ -81,7 +81,7 @@ class CharactersTableViewController: UITableViewController {
                                 
                                           
                                 toAppendCharacter.append(character)
-
+                                self.characterObject.onNext(toAppendCharacter)
                                 print("characters inside closure 1", character)
                                 
                                 print("inside closure 1", toAppendCharacter.count)
