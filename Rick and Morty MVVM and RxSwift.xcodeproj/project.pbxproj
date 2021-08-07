@@ -21,6 +21,7 @@
 		E9981C1326BA825F002F04C3 /* EpisodeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9981C1226BA825F002F04C3 /* EpisodeViewModel.swift */; };
 		E9981C1526BA8E8F002F04C3 /* CharactersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9981C1426BA8E8F002F04C3 /* CharactersTableViewController.swift */; };
 		E9DD327326BC090B0023E504 /* CharactersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DD327226BC090B0023E504 /* CharactersViewModel.swift */; };
+		E9E88BB326BED73E00EF209D /* SectionOfCharacters.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E88BB226BED73E00EF209D /* SectionOfCharacters.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		E9981C1226BA825F002F04C3 /* EpisodeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeViewModel.swift; sourceTree = "<group>"; };
 		E9981C1426BA8E8F002F04C3 /* CharactersTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersTableViewController.swift; sourceTree = "<group>"; };
 		E9DD327226BC090B0023E504 /* CharactersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersViewModel.swift; sourceTree = "<group>"; };
+		E9E88BB226BED73E00EF209D /* SectionOfCharacters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionOfCharacters.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +126,7 @@
 				E9981C1026BA8198002F04C3 /* EpisodesTableViewController.swift */,
 				E9981C1426BA8E8F002F04C3 /* CharactersTableViewController.swift */,
 				E9171DFF26BE948F0000F772 /* SingleCharacterViewController.swift */,
+				E9E88BB226BED73E00EF209D /* SectionOfCharacters.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -263,6 +266,7 @@
 				E94721BE26B977A90095AFB9 /* EpisodeList.swift in Sources */,
 				E94721C026B977C20095AFB9 /* Character.swift in Sources */,
 				E9981C1326BA825F002F04C3 /* EpisodeViewModel.swift in Sources */,
+				E9E88BB326BED73E00EF209D /* SectionOfCharacters.swift in Sources */,
 				E9981C0F26BA8089002F04C3 /* URLRequest+Extensions.swift in Sources */,
 				E9981C1126BA8198002F04C3 /* EpisodesTableViewController.swift in Sources */,
 				E9981C1526BA8E8F002F04C3 /* CharactersTableViewController.swift in Sources */,

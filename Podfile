@@ -13,5 +13,8 @@ target 'Rick and Morty MVVM and RxSwift' do
   pod 'Alamofire'
   pod 'RxAlamofire'
   pod 'RxDataSources'
+  pod 'Nuke', '~> 9.0'
+  pod "RxAnimated"
+
 
 end

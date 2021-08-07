@@ -49,6 +49,11 @@ class EpisodesTableViewController: UITableViewController {
             .drive((cell.textLabel?.rx.text)!)
             .disposed(by: disposeBag)
         
+        cell.imageView?.image = UIImage(named: "icon")
+        
+        cell.accessoryType = .disclosureIndicator
+        cell.textLabel!.numberOfLines = 0
+
         
         return cell
     }
@@ -69,7 +74,7 @@ class EpisodesTableViewController: UITableViewController {
         charactersVC?.receivedEpisode.accept(self.episodeListViewModel.episodeAt(self.indexOfSelectedEpisode))
     }
     
-
+    
     
     private func populateEpisodes() {
         

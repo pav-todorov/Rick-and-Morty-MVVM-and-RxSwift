@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import RxDataSources
 
 struct Character: Codable {
     let name: String
