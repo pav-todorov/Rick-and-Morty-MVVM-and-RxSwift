@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		6E29F3AC8D8867461FD545AB /* Pods_Rick_and_Morty_MVVM_and_RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 749B9E2FA835F79BE5758D09 /* Pods_Rick_and_Morty_MVVM_and_RxSwift.framework */; };
+		E9171E0026BE948F0000F772 /* SingleCharacterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9171DFF26BE948F0000F772 /* SingleCharacterViewController.swift */; };
 		E94721AA26B977210095AFB9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94721A926B977210095AFB9 /* AppDelegate.swift */; };
 		E94721AC26B977210095AFB9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94721AB26B977210095AFB9 /* SceneDelegate.swift */; };
 		E94721B126B977210095AFB9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E94721AF26B977210095AFB9 /* Main.storyboard */; };
@@ -26,6 +27,7 @@
 		749B9E2FA835F79BE5758D09 /* Pods_Rick_and_Morty_MVVM_and_RxSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Rick_and_Morty_MVVM_and_RxSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A154437B79081587EE84AB7 /* Pods-Rick and Morty MVVM and RxSwift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rick and Morty MVVM and RxSwift.debug.xcconfig"; path = "Target Support Files/Pods-Rick and Morty MVVM and RxSwift/Pods-Rick and Morty MVVM and RxSwift.debug.xcconfig"; sourceTree = "<group>"; };
 		B8BA8481641D7D115AAFAD9B /* Pods-Rick and Morty MVVM and RxSwift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rick and Morty MVVM and RxSwift.release.xcconfig"; path = "Target Support Files/Pods-Rick and Morty MVVM and RxSwift/Pods-Rick and Morty MVVM and RxSwift.release.xcconfig"; sourceTree = "<group>"; };
+		E9171DFF26BE948F0000F772 /* SingleCharacterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleCharacterViewController.swift; sourceTree = "<group>"; };
 		E94721A626B977210095AFB9 /* Rick and Morty MVVM and RxSwift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Rick and Morty MVVM and RxSwift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E94721A926B977210095AFB9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E94721AB26B977210095AFB9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -121,6 +123,7 @@
 			children = (
 				E9981C1026BA8198002F04C3 /* EpisodesTableViewController.swift */,
 				E9981C1426BA8E8F002F04C3 /* CharactersTableViewController.swift */,
+				E9171DFF26BE948F0000F772 /* SingleCharacterViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -255,6 +258,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E9171E0026BE948F0000F772 /* SingleCharacterViewController.swift in Sources */,
 				E9DD327326BC090B0023E504 /* CharactersViewModel.swift in Sources */,
 				E94721BE26B977A90095AFB9 /* EpisodeList.swift in Sources */,
 				E94721C026B977C20095AFB9 /* Character.swift in Sources */,
@@ -412,8 +416,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 87GZ4V994Y;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "Rick and Morty MVVM and RxSwift/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -421,7 +426,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.flatrocktech.Rick-and-Morty-MVVM-and-RxSwift";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -432,8 +437,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 87GZ4V994Y;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "Rick and Morty MVVM and RxSwift/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -441,7 +447,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.flatrocktech.Rick-and-Morty-MVVM-and-RxSwift";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

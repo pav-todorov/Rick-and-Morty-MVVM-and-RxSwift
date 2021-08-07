@@ -3,11 +3,13 @@
 <plist version="1.0">
 <dict>
 	<key>SchemeUserState</key>
+	<dict/>
+	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>Rick and Morty MVVM and RxSwift.xcscheme_^#shared#^_</key>
+		<key>E94721A526B977210095AFB9</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>10</integer>
+			<key>primary</key>
+			<true/>
 		</dict>
 	</dict>
 </dict>

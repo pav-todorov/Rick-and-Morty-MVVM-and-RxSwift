@@ -9,6 +9,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 import RxDataSources
+import SDWebImage
 
 class CharactersTableViewController: UITableViewController {
     
@@ -41,11 +42,9 @@ class CharactersTableViewController: UITableViewController {
         
         // MARK: - Table view data source
         
-//        var characters = charactersListViewModel?.getAllCharacters()
-        
-        
-        
         characterObject.bind(to: tableView.rx.items(cellIdentifier: "CharacterTableViewCell")) { index, model, cell in
+            
+            cell.imageView?.sd_setImage(with: URL(string: model.image), placeholderImage: nil)
 
             cell.textLabel?.text = model.name
 
@@ -57,14 +56,30 @@ class CharactersTableViewController: UITableViewController {
       
         self.characterObject.onNext(toAppendCharacter)
         
-
+        tableView.rx.modelSelected(Character.self)
+            .subscribe(onNext: { [weak self] model in
+                
+                guard let strongSelf = self else { return }
+                
+                guard let singleCharacterVC = strongSelf.storyboard?.instantiateViewController(identifier: "SingleCharacterViewController") as? SingleCharacterViewController else {
+                    fatalError("SingleCharacterViewController not found")
+                }
+                
+                
+                singleCharacterVC.receivedCharacter.accept(model)
+                
+                
+                strongSelf.navigationController?.pushViewController(singleCharacterVC, animated: true)
+                
+                
+            }).disposed(by: disposeBag)
     }
+
     
     
+    /// Gets characters from the URLs that have been passed by the EpisodeTableViewController
     private func populateCharacters() {
         
-        
-            
         receivedEpisode.subscribe(onNext: { episodeViewModel in
             
             if let episodeViewModel = episodeViewModel{
@@ -82,23 +97,23 @@ class CharactersTableViewController: UITableViewController {
                                           
                                 toAppendCharacter.append(character)
                                 self.characterObject.onNext(toAppendCharacter)
-                                print("characters inside closure 1", character)
                                 
-                                print("inside closure 1", toAppendCharacter.count)
+                                
+                                
                                 
                             }).disposed(by: self.disposeBag)
-                        print("inside closure 2", self.toAppendCharacter.count)
+                        
                     }
-                    print("inside closure 3", self.toAppendCharacter.count)
+                    
                 }).disposed(by: self.disposeBag)
-                print("inside closure 4", self.toAppendCharacter.count)
+                
             }
-            print("inside closure 5", self.toAppendCharacter.count)
+            
         }).disposed(by: disposeBag)
         
-        self.characterObject.onNext(toAppendCharacter)
+//        self.characterObject.onNext(toAppendCharacter)
         
-        print("outside closure", toAppendCharacter.count)
+        
         
         
         
