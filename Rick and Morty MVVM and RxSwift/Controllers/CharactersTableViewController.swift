@@ -12,6 +12,8 @@ import RxDataSources
 import SDWebImage
 import Nuke
 import RxAnimated
+import RxNuke
+
 
 class CharactersTableViewController: UITableViewController, UISearchResultsUpdating {
     
@@ -21,11 +23,21 @@ class CharactersTableViewController: UITableViewController, UISearchResultsUpdat
     
 //    var toAppendCharacter:[Character] = []
     
+    var isSearchBarEmpty: Bool {
+        return searchController.searchBar.text?.isEmpty ?? true
+    }
+    
+    var isFiltering: Bool {
+        return searchController.isActive && !isSearchBarEmpty
+    }
+    
     var foundCharacter = BehaviorRelay<[Character]>(value: [])
     
     let options = ImageLoadingOptions(
         placeholder: UIImage(named: "icon"),
         transition: .fadeIn(duration: 0.33))
+    
+    var bufferOfCharactersWhileSearching = BehaviorRelay<[Character]>(value: [])
     
     private let disposeBag = DisposeBag()
     var episodeViewModel = BehaviorRelay<EpisodeViewModel?>(value: nil)
@@ -38,6 +50,8 @@ class CharactersTableViewController: UITableViewController, UISearchResultsUpdat
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+
         
         self.tableView.dataSource = nil
         
@@ -63,41 +77,81 @@ class CharactersTableViewController: UITableViewController, UISearchResultsUpdat
         }).disposed(by: disposeBag)
         
         
-        // MARK: - Table view data source
+        // MARK: - Table view data
         
         
+//        Observable.combineLatest(characterObject, foundCharacter){ (initialCharacters, filteredCharacters) -> [Character] in
+//
+//            if self.isFiltering {
+//                return filteredCharacters
+//            } else {
+//                return initialCharacters
+//            }
+//
+//
+//
+//
+//        }.bind(to: tableView.rx.items(cellIdentifier: "CharacterTableViewCell")) { [unowned self] index, model, cell in
+//
+////            Nuke.loadImage(with: ImageRequest(url: URL(string: model.image)!, processors: [
+////                ImageProcessors.Circle(border: ImageProcessingOptions.Border(color: .white, width: 20, unit: .points)),
+////
+////            ]), options: self.options, into: cell.imageView!)
+//
+//            ImagePipeline.shared.rx.loadImage(with: URL(string: model.image)!)
+//                .subscribe(onSuccess: { imageView in
+//                        return cell.imageView!.image = imageView.image
+//                             })
+//                .disposed(by: self.disposeBag)
+//
+//
+////            cell.imageView?.sd_setImage(with: URL(string: model.image), placeholderImage: nil)
+//
+//
+//            cell.imageView?.image = UIImage(named: "icon")
+//
+//            cell.accessoryType = .disclosureIndicator
+//            cell.textLabel!.numberOfLines = 0
+//            cell.imageView?.layer.shadowColor = UIColor.gray.cgColor
+//            cell.imageView?.layer.shadowOpacity = 0.5
+//            cell.imageView?.layer.shadowOffset = .zero
+//            cell.imageView?.layer.shadowRadius = 5
+//
+//
+//            cell.textLabel?.text = model.name
+//
+//
+//
+//        }.disposed(by: disposeBag)
         
-        characterObject.bind(to: tableView.rx.items(cellIdentifier: "CharacterTableViewCell")) { index, model, cell in
+
+        let dataSource = RxTableViewSectionedReloadDataSource<SectionModel<[Character], Int>>(configureCell: { dataSource, tableView, indexPath, item in
+            let cell = tableView.dequeueReusableCell(withIdentifier: "CharacterTableViewCell", for: indexPath)
             
-            //            cell.imageView?.sd_setImage(with: URL(string: model.image), placeholderImage: nil)
-            
-            
-            
-            Nuke.loadImage(with: ImageRequest(url: URL(string: model.image)!, processors: [
-                ImageProcessors.Circle(border: ImageProcessingOptions.Border(color: .white, width: 20, unit: .points)),
-                
-            ]), options: self.options, into: cell.imageView!)
+            cell.textLabel?.text = "test"
             
             
-            cell.imageView?.image = UIImage(named: "icon")
             
-            cell.accessoryType = .disclosureIndicator
-            cell.textLabel!.numberOfLines = 0
-            cell.imageView?.layer.shadowColor = UIColor.gray.cgColor
-            cell.imageView?.layer.shadowOpacity = 0.5
-            cell.imageView?.layer.shadowOffset = .zero
-            cell.imageView?.layer.shadowRadius = 5
+            ImagePipeline.shared.rx.loadImage(with: URL(string: "https://rickandmortyapi.com/api/character/avatar/2.jpeg")!)
+                            .subscribe(onSuccess: { imageView in
+                                    return cell.imageView!.image = imageView.image
+                                         })
+                            .disposed(by: self.disposeBag)
             
-            
-            cell.textLabel?.text = model.name
-            
-            
-        }.disposed(by: disposeBag)
+            return cell
+        })
+        
+    Observable.just([SectionModel(model: [Character(name: "test", status: "", species: "", gender: "", image: "")], items: [1,1, 2, 3, 4,5 ,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20])])
+            .bind(to: tableView.rx.items(dataSource: dataSource))
+            .disposed(by: disposeBag)
+
         
         populateCharacters()
         
         
 //        self.characterObject.onNext(toAppendCharacter)
+        
+        // MARK: - Selecting a row
         
         tableView.rx.modelSelected(Character.self)
             .subscribe(onNext: { [weak self] model in
@@ -117,36 +171,62 @@ class CharactersTableViewController: UITableViewController, UISearchResultsUpdat
                 
             }).disposed(by: disposeBag)
         
+        
         //MARK: - searching characters
-        searchController.searchBar.rx.text.orEmpty.distinctUntilChanged().filter{ !$0.isEmpty }.subscribe(onNext: { query in
-            
-            print("printing query", query)
-            
-            self.characterObject.map{ $0.filter { $0.name.lowercased().contains(query.lowercased()) } }.subscribe(onNext: { result in
-                
-                
-                
-                self.foundCharacter.accept(self.foundCharacter.value + result)
-                
-                print("printing result", self.foundCharacter.value.count)
+        
+//        searchController.searchBar.rx.text.orEmpty.distinctUntilChanged().filter{ !$0.isEmpty }.subscribe(onNext: { query in
+//
+//            print("printing query", query)
+//
+//            self.characterObject.map{ $0.filter { $0.name.lowercased().contains(query.lowercased()) } }.subscribe(onNext: { result in
+//
+//                self.foundCharacter.accept(result)
+//                self.characterObject.accept(self.foundCharacter.value)
+//
+////                if result[0].name != nil {
+////                    print("printing found character", result[0].name)
+////
+////                }
+//
+//
+//
+//            }).disposed(by: self.disposeBag)
+        
+        searchController.searchBar.rx.text
+                .orEmpty
+                .distinctUntilChanged()
+                .subscribe(onNext: {query in
+                    self.foundCharacter.accept(self.characterObject.value.filter {
+               
+                         $0.name.lowercased().contains(query.lowercased())
+                                                
+                    })
+                }).disposed(by: disposeBag)
 
-                
-            }).disposed(by: self.disposeBag)
-            
 //            self.tableView.reloadData()
+
+//        }).disposed(by: disposeBag)
+        
+        
+        self.searchController.searchBar.rx.textDidBeginEditing.subscribe(onNext: {
+            
+//            self.bufferOfCharactersWhileSearching.accept(self.characterObject.value)
             
         }).disposed(by: disposeBag)
         
         self.searchController.searchBar.rx.textDidEndEditing.subscribe(onNext: {
-            self.foundCharacter = BehaviorRelay<[Character]>(value: [])
             
+//            self.characterObject.accept(self.bufferOfCharactersWhileSearching.value)
+
             print("printing result after cancel", self.foundCharacter.value.count)
-            
+
         }).disposed(by: disposeBag)
+        
+
         
     }
     
-    
+  
     
     /// Gets characters from the URLs that have been passed by the EpisodeTableViewController
     private func populateCharacters() {

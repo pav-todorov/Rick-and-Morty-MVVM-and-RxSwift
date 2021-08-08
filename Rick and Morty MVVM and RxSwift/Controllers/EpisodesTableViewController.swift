@@ -23,10 +23,16 @@ class EpisodesTableViewController: UITableViewController {
         return selectedEpisode.asObservable()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        
+        populateEpisodes()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        populateEpisodes()
+       
         
     }
     

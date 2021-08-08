@@ -21,6 +21,9 @@ PODS:
     - Differentiator (~> 5.0)
     - RxCocoa (~> 6.0)
     - RxSwift (~> 6.0)
+  - RxNuke (2.0.1):
+    - Nuke (~> 9.0)
+    - RxSwift (~> 6.0)
   - RxRelay (6.2.0):
     - RxSwift (= 6.2.0)
   - RxSwift (6.2.0)
@@ -36,6 +39,7 @@ DEPENDENCIES:
   - RxAnimated
   - RxCocoa
   - RxDataSources
+  - RxNuke
   - RxSwift
   - SDWebImage
   - SwiftLint
@@ -49,6 +53,7 @@ SPEC REPOS:
     - RxAnimated
     - RxCocoa
     - RxDataSources
+    - RxNuke
     - RxRelay
     - RxSwift
     - SDWebImage
@@ -62,11 +67,12 @@ SPEC CHECKSUMS:
   RxAnimated: e53fb66cafc0539faf881b734f7412a624527f0a
   RxCocoa: 4baf94bb35f2c0ab31bc0cb9f1900155f646ba42
   RxDataSources: aa47cc1ed6c500fa0dfecac5c979b723542d79cf
+  RxNuke: 23175fb4b7cda4e3aa453588d895198ccf88f5ab
   RxRelay: e72dbfd157807478401ef1982e1c61c945c94b2f
   RxSwift: d356ab7bee873611322f134c5f9ef379fa183d8f
   SDWebImage: a7f831e1a65eb5e285e3fb046a23fcfbf08e696d
   SwiftLint: 99f82d07b837b942dd563c668de129a03fc3fb52
 
-PODFILE CHECKSUM: 9b0f10d13b8f9a01d8d29a817c63c3f62be0c9a7
+PODFILE CHECKSUM: 2bcf3a614c0cdd4cb771f71c13ec74e796ea2978
 
 COCOAPODS: 1.10.1
