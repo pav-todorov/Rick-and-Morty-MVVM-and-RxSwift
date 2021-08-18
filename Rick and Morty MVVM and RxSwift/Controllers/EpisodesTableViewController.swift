@@ -75,7 +75,7 @@ class EpisodesTableViewController: UITableViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        var charactersVC = segue.destination as? CharactersTableViewController
+        let charactersVC = segue.destination as? CharactersTableViewController
         
         charactersVC?.receivedEpisode.accept(self.episodeListViewModel.episodeAt(self.indexOfSelectedEpisode))
     }

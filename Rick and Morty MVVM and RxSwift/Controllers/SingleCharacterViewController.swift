@@ -40,11 +40,7 @@ class SingleCharacterViewController: UIViewController {
                 ImageProcessors.Circle(border: ImageProcessingOptions.Border(color: .white, width: 10, unit: .points))
             ]), options: self.options, into: self.characterImageView)
             
-          
-            
-//            self.characterImageView.sd_setImage(with: URL(string: characterModel!.image), placeholderImage: nil)
         }.disposed(by: disposeBag)
-
         
         receivedCharacter.map { $0?.name }.bind(to: self.characterNameLabel.rx.text).disposed(by: disposeBag)
         receivedCharacter.map { $0?.status }.bind(to: self.statusLabel.rx.text).disposed(by: disposeBag)
@@ -52,7 +48,5 @@ class SingleCharacterViewController: UIViewController {
         receivedCharacter.map { $0?.gender }.bind(to: self.genderLabel.rx.text).disposed(by: disposeBag)
         
     }
-    
-
 
 }
